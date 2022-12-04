@@ -7,10 +7,8 @@ TASK createTask(int taskNUM) {
 	task.isThereATask = true;
 
 	printf("\nEnter the name for the task you wish to add: ");
-	if (scanf("%[^\n]%*c", task.taskName) != 1) {		// This allows us to eceivea full string (including spaces) as an input
-		printf("\nInvalid Input");
-		exit(1);
-	}
+	fseek(stdin, 0, SEEK_END);
+	fgets(task.taskName, MAXTASKNAMELENGTH, stdin);
 
 	printf("\nPlease enter the name of the month in which this task takes place: ");
 	if (scanf("%s", task.month)!=1) {
@@ -25,7 +23,7 @@ TASK createTask(int taskNUM) {
 	}
 
 	printf("\nPlease enter the number of the day on which the task takes place: ");
-	if (scanf("%d", &task.day)) {
+	if (scanf("%d", &task.day)!=1) {
 		printf("\nInvalid Input");
 		exit(1);
 	}
@@ -62,7 +60,7 @@ void displayOneTask(TASK tdList[], int taskNUM) {
 	printf("\nYou have selected to display task %d", taskNUM);
 
 	printf("\nTask Name: %s", tdList[taskNUM].taskName);
-	printf("\nDate of task: %d %s %d", tdList[taskNUM].year, tdList[taskNUM].month, tdList[taskNUM].day);
+	printf("Date of task: %d %s %d", tdList[taskNUM].year, tdList[taskNUM].month, tdList[taskNUM].day);
 }
 
 void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {
@@ -70,7 +68,7 @@ void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {
 		printf("\nTask Number: %d", i);
 
 		printf("\nTask Name: %s", tdList[i].taskName);
-		printf("\nDate of task: %d %s %d", tdList[i].year, tdList[i].month, tdList[i].day);
+		printf("Date of task: %d %s %d", tdList[i].year, tdList[i].month, tdList[i].day);
 	}
 }
 
@@ -81,7 +79,7 @@ void listOfAllTasks(TASK tdList[]) {
 			printf("\nTask Number: %d", i);
 
 			printf("\nTask Name: %s", tdList[i].taskName);
-			printf("\nDate of task: %d %s %d", tdList[i].year, tdList[i].month, tdList[i].day);
+			printf("Date of task: %d %s %d\n", tdList[i].year, tdList[i].month, tdList[i].day);
 		}
 	}
 }
