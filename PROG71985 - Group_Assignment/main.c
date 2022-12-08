@@ -9,16 +9,55 @@
 
 // revision history
 // 1.0			2022-December-04			initial
-
 #include "task.h"
+
 
 int main(int argc, char* argv[]) {
 
 	TASK tdList[MAXNUMOFTASKS];
 
-	for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
-		tdList[i].isThereATask = false;					// in order to make my stuff for now
+	
+	FILE* file;
+	if ((file = fopen("Tasks.txt", "r")) != NULL)
+	{
+		// file exists
+		printf("File found");
+
+		char buffer[256];
+		char bufferTwo[256];
+
+		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
+			
+	
+			if (fgets(buffer, 256, file) == NULL)			// in order to make my stuff for now
+			{
+				fclose(file);
+			}
+			int result;
+			result = strcmp(bufferTwo, buffer);
+			if (result != 0) {
+				sscanf(buffer, "%d %d %s %s", &tdList[i].year, &tdList[i].day, &tdList[i].month, &tdList[i].taskName);
+				tdList[i].isThereATask = true;
+			}
+			else
+				tdList[i].isThereATask = false;
+
+			strncpy(bufferTwo, buffer, 256);
+		}
+
+		fclose(file);
 	}
+	else
+	{
+		//File not found, no memory leak since 'file' == NULL
+		//fclose(file) would cause an error
+		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
+			tdList[i].isThereATask = false;
+		}
+		printf("File not found");
+	}
+	
+
 
 	char menuChoice;
 	int taskNum;
@@ -59,7 +98,16 @@ int main(int argc, char* argv[]) {
 			}
 			taskDelete(tdList, taskNum);
 			break;
-		case 'c':					// Update an existing task				
+		case 'c':					// Update an existing task	
+			taskNum = 0;
+			printf("\nWhich task would you like to update? (Task 1 = 0):");
+
+			if (scanf("%d", &taskNum) != 1) {
+				printf("\nInvalid Input");
+				exit(1);
+			}
+			updateExistingTask(tdList, taskNum);
+
 			break;
 		case 'd':					// Display one task		
 			taskNum = 0;
@@ -92,6 +140,23 @@ int main(int argc, char* argv[]) {
 			searchForATAsk(tdList);
 			break;
 		case 'z':					// Quit
+
+			fopen_s(&file, "Tasks.txt", "w");
+			if (file == NULL) {
+				printf("Error Writing");
+			}
+			char buffer_in[256], buffer_out[256];
+			for (int i = 0; i < MAXNUMOFTASKS; i++) {			
+				if (tdList[i].isThereATask == true) {
+					fprintf(file,"%d %d %s %s\n", tdList[i].year, tdList[i].day, tdList[i].month, tdList[i].taskName);
+				}
+			}
+			if (file == NULL) {
+
+			}
+			else
+				fclose(file);
+		
 			break;
 		case '\n':
 			break;

@@ -1,5 +1,6 @@
 #include "task.h"
 
+
 TASK createTask(int taskNUM) {
 	TASK task;
 
@@ -35,7 +36,78 @@ void taskDelete(TASK tdList[], int taskNUM) {
 	tdList[taskNUM].isThereATask = false;				// When creating a task only checks if the bool is false or not
 }														// So nothing else needs to be removed
 
-TASK updateExistingTask(TASK tdList[]) {
+TASK updateExistingTask(TASK tdList[], int taskNUM) {
+	TASK task;
+	task.taskNUM = taskNUM;
+	task.isThereATask = true;
+	char whatToUpdate;
+
+	printf("\nWhich part would you like to update\n\n");
+
+	printf("a) The name of the task\nb) The month of the task\nc) The year of the task\nd) The day of the task\ne) All\n");
+
+	fseek(stdin, 0, SEEK_END);
+	if (scanf("%c", &whatToUpdate) != 1) {
+		printf("\nInvalid Input");
+		exit(1);
+	}
+
+	switch (whatToUpdate)
+	{
+	case 'a':
+		printf("\nWhat would you like to rename the task to?\n"); 
+		if (scanf("%s", &tdList[taskNUM].taskName) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		break;
+	case 'b':
+		printf("\nWhat would you like to change the new month to?\n");
+		if (scanf("%s", &tdList[taskNUM].month) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		break;
+	case 'c':
+		printf("\nWhat would you like to change the new year to?\n");
+		if (scanf("%d", &tdList[taskNUM].year) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		break;
+	case 'd':
+		printf("\nWhat would you like to change the new day to?\n");
+		if (scanf("%d", &tdList[taskNUM].day) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		
+		break;
+	case 'e':
+		printf("\nWhat would you like to rename the task to?\n");
+		if (scanf("%s", &tdList[taskNUM].taskName) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		printf("\nWhat would you like to change the new month to?\n");
+		if (scanf("%s", &tdList[taskNUM].month) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		printf("\nWhat would you like to change the new year to?\n");
+		if (scanf("%d", &tdList[taskNUM].year) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		printf("\nWhat would you like to change the new day to?\n");
+		if (scanf("%d", &tdList[taskNUM].day) != 1) {
+			printf("\nInvalid Input");
+			exit(1);
+		}
+		break;
+
+
+	}
 
 }
 
