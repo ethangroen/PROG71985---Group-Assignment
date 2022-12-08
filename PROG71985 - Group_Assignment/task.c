@@ -57,18 +57,25 @@ bool isListFull(TASK tdList[]) {
 }
 
 void displayOneTask(TASK tdList[], int taskNUM) {
-	printf("\nYou have selected to display task %d", taskNUM);
+	if (tdList[taskNUM].isThereATask == true) {
+		printf("\nYou have selected to display task %d", taskNUM);
 
-	printf("\nTask Name: %s", tdList[taskNUM].taskName);
-	printf("Date of task: %d %s %d", tdList[taskNUM].year, tdList[taskNUM].month, tdList[taskNUM].day);
+		printf("\nTask Name: %s", tdList[taskNUM].taskName);
+		printf("Date of task: %d %s %d", tdList[taskNUM].year, tdList[taskNUM].month, tdList[taskNUM].day);
+	}
+	else {
+		printf("\nThere is no task in that slot.");
+	}
 }
 
 void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {
 	for (int i = rangeStart; i <= rangeEnd; i++) {
-		printf("\nTask Number: %d", i);
+		if (tdList[i].isThereATask == true) {
+			printf("\nTask Number: %d", i);
 
-		printf("\nTask Name: %s", tdList[i].taskName);
-		printf("Date of task: %d %s %d", tdList[i].year, tdList[i].month, tdList[i].day);
+			printf("\nTask Name: %s", tdList[i].taskName);
+			printf("Date of task: %d %s %d", tdList[i].year, tdList[i].month, tdList[i].day);
+		}
 	}
 }
 
@@ -89,10 +96,8 @@ void searchForATAsk(TASK tdList[]) {
 	bool isPresent = false;
 
 	printf("\nEnter the name for the task you wish to find: ");
-	if (scanf("%[^\n]%*c", name) != 1) {
-		printf("\nInvalid Input");
-		exit(1);
-	}
+	fgets(name, MAXTASKNAMELENGTH, stdin);
+
 	for (int i = 0; i < MAXNUMOFTASKS; i++) {
 		if (strcmp(tdList[i].taskName, name) == 0) {
 			printf("That task is on the list, its number is: %d", i);
