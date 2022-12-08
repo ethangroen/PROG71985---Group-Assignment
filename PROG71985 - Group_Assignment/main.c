@@ -10,53 +10,23 @@
 // revision history
 // 1.0			2022-December-04			initial
 #include "task.h"
+#include "loadAndSave.h"
 
 
 int main(int argc, char* argv[]) {
 
 	TASK tdList[MAXNUMOFTASKS];
 
-	
-	FILE* file;
-	if ((file = fopen("Tasks.txt", "r")) != NULL)
-	{
-		// file exists
-		printf("File found");
-
-		char buffer[256];
-		char bufferTwo[256];
-
-		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
-			
-	
-			if (fgets(buffer, 256, file) == NULL)			// in order to make my stuff for now
-			{
-				fclose(file);
-			}
-			int result;
-			result = strcmp(bufferTwo, buffer);
-			if (result != 0) {
-				sscanf(buffer, "%d %d %s %s", &tdList[i].year, &tdList[i].day, &tdList[i].month, &tdList[i].taskName);
-				tdList[i].isThereATask = true;
-			}
-			else
-				tdList[i].isThereATask = false;
-
-			strncpy(bufferTwo, buffer, 256);
-		}
-
-		fclose(file);
+	for (int i = 0; i < MAXNUMOFTASKS; i++) {
+		tdList[i].isThereATask = false;
 	}
-	else
-	{
-		//File not found, no memory leak since 'file' == NULL
-		//fclose(file) would cause an error
-		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
-			tdList[i].isThereATask = false;
-		}
-		printf("File not found");
+
+	if (LoadtdListFromDisk(tdList, "tasks.txt") == false) {
+		printf("There was no data to load\n");
 	}
-	
+	else {
+		printf("Data was loaded from previous session\n");
+	}
 
 
 	char menuChoice;
@@ -140,23 +110,6 @@ int main(int argc, char* argv[]) {
 			searchForATAsk(tdList);
 			break;
 		case 'z':					// Quit
-
-			fopen_s(&file, "Tasks.txt", "w");
-			if (file == NULL) {
-				printf("Error Writing");
-			}
-			char buffer_in[256], buffer_out[256];
-			for (int i = 0; i < MAXNUMOFTASKS; i++) {			
-				if (tdList[i].isThereATask == true) {
-					fprintf(file,"%d %d %s %s\n", tdList[i].year, tdList[i].day, tdList[i].month, tdList[i].taskName);
-				}
-			}
-			if (file == NULL) {
-
-			}
-			else
-				fclose(file);
-		
 			break;
 		case '\n':
 			break;
@@ -165,6 +118,10 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 	} while (menuChoice != 'z');
+
+	if (SavetdListToDisk(tdList, "tasks.txt") == false) {
+		printf("Save was unsuccessful");
+	}
 
 	return 0;
 }

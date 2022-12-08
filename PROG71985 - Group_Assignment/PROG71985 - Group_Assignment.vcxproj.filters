@@ -26,9 +26,15 @@
     <ClCompile Include="task.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loadAndSave.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadAndSave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
