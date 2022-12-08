@@ -67,10 +67,7 @@ TASK updateExistingTask(TASK tdList[], int taskNUM) {
 	{
 	case 'a':
 		printf("\nWhat would you like to rename the task to?\n"); 
-		if (scanf("%s", &tdList[taskNUM].taskName) != 1) {
-			printf("\nInvalid Input");
-			exit(1);
-		}
+		fgets(task.taskName, MAXTASKNAMELENGTH, stdin);
 		break;
 	case 'b':
 		printf("\nWhat would you like to change the new month to?\n");
