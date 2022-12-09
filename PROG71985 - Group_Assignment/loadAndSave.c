@@ -18,6 +18,7 @@ bool SavetdListToDisk(TASK tdList[], char* filename)
 	fopen_s(&file, filename, "w");
 	if (file == NULL) {
 		printf("Error Writing");
+		return false;
 	}
 	char buffer_in[MAXFILESIZE], buffer_out[MAXFILESIZE];
 	for (int i = 0; i < MAXNUMOFTASKS; i++) {
@@ -30,6 +31,7 @@ bool SavetdListToDisk(TASK tdList[], char* filename)
 	}
 	else
 		fclose(file);
+	return true;
 }
 
 bool LoadtdListFromDisk(TASK tdList[], char* filename)
@@ -62,6 +64,7 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 		}
 
 		fclose(file);
+		return true;
 	}
 	else
 	{
@@ -71,6 +74,7 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 			tdList[i].isThereATask = false;
 		}
 		printf("File not found");
+		return false;
 	}
 }
 
