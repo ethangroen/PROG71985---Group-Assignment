@@ -40,7 +40,6 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 	if ((file = fopen(filename, "r")) != NULL)
 	{
 		// file exists
-		printf("File found");
 
 		char buffer[MAXFILESIZE];
 		char bufferTwo[MAXFILESIZE];
@@ -54,7 +53,7 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 			int result;
 			result = strcmp(bufferTwo, buffer);
 			if (result != 0) {
-				sscanf(buffer, "%d %d %s %s", &tdList[i].year, &tdList[i].day, &tdList[i].month, &tdList[i].taskName);
+				sscanf(buffer, "%d %d %s %[^\n]%*c", &tdList[i].year, &tdList[i].day, &tdList[i].month, &tdList[i].taskName);
 				tdList[i].isThereATask = true;
 			}
 			else
@@ -73,7 +72,6 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
 			tdList[i].isThereATask = false;
 		}
-		printf("File not found");
 		return false;
 	}
 }

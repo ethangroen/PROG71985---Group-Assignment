@@ -140,7 +140,7 @@ void displayOneTask(TASK tdList[], int taskNUM) {
 	if (tdList[taskNUM].isThereATask == true) {
 		printf("\nYou have selected to display task %d", taskNUM);
 
-		printf("\nTask Name: %s", tdList[taskNUM].taskName);
+		printf("\nTask Name: %s\n", tdList[taskNUM].taskName);
 		printf("Date of task: %d %s %d", tdList[taskNUM].year, tdList[taskNUM].month, tdList[taskNUM].day);
 	}
 	else {
@@ -165,7 +165,7 @@ void listOfAllTasks(TASK tdList[]) {
 		else {
 			printf("\nTask Number: %d", i);
 
-			printf("\nTask Name: %s", tdList[i].taskName);
+			printf("\nTask Name: %s\n", tdList[i].taskName);
 			printf("Date of task: %d %s %d\n", tdList[i].year, tdList[i].month, tdList[i].day);
 		}
 	}
