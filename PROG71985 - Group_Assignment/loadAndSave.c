@@ -14,63 +14,64 @@
 
 bool SavetdListToDisk(TASK tdList[], char* filename)
 {
-	FILE* fp;
-	if ((fp = fopen(filename, "w")) == NULL)
-		return false;
-
-	for (int i = 0; i < MAXNUMOFTASKS; i++)
-	{
-		SaveTaskToStream(tdList[i], fp);
+	FILE* file;
+	fopen_s(&file, filename, "w");
+	if (file == NULL) {
+		printf("Error Writing");
 	}
+	char buffer_in[MAXFILESIZE], buffer_out[MAXFILESIZE];
+	for (int i = 0; i < MAXNUMOFTASKS; i++) {
+		if (tdList[i].isThereATask == true) {
+			fprintf(file, "%d %d %s %s\n", tdList[i].year, tdList[i].day, tdList[i].month, tdList[i].taskName);
+		}
+	}
+	if (file == NULL) {
 
-	fclose(fp);
-	return true;
-}
-
-void SaveTaskToStream(TASK task, FILE* fp)
-{
-	fprintf(fp, "%d\n", task.taskNUM);
-	fprintf(fp, "%d\n", task.year);
-	fprintf(fp, "%s\n", task.month);
-	fprintf(fp, "%d\n", task.day);
-	fprintf(fp, "%s\n", task.taskName);
+	}
+	else
+		fclose(file);
 }
 
 bool LoadtdListFromDisk(TASK tdList[], char* filename)
 {
-	FILE* fp;
-	if ((fp = fopen(filename, "r")) == NULL)
-		return false;
+	FILE* file;
+	if ((file = fopen(filename, "r")) != NULL)
+	{
+		// file exists
+		printf("File found");
 
-	char taskNUM[MAXTASKNAMELENGTH];
-	char year[MAXTASKNAMELENGTH];
-	char month[MAXTASKNAMELENGTH];
-	char day[MAXTASKNAMELENGTH];
-	char taskname[MAXTASKNAMELENGTH];
+		char buffer[MAXFILESIZE];
+		char bufferTwo[MAXFILESIZE];
 
+		for (int i = 0; i < MAXNUMOFTASKS; i++) {			
 
-	for (int i = 0; i < MAXNUMOFTASKS; i++) {
-		fgets(taskNUM,MAXTASKNAMELENGTH , fp);
-		fgets(year, MAXTASKNAMELENGTH, fp);
-		fgets(month, MAXTASKNAMELENGTH, fp);
-		fgets(day, MAXTASKNAMELENGTH, fp);
-		fgets(taskname, MAXTASKNAMELENGTH, fp);
+			if (fgets(buffer, MAXFILESIZE, file) == NULL)			
+			{
+				fclose(file);
+			}
+			int result;
+			result = strcmp(bufferTwo, buffer);
+			if (result != 0) {
+				sscanf(buffer, "%d %d %s %s", &tdList[i].year, &tdList[i].day, &tdList[i].month, &tdList[i].taskName);
+				tdList[i].isThereATask = true;
+			}
+			else
+				tdList[i].isThereATask = false;
 
-		removeNfromChar(month);
-		removeNfromChar(taskname);
+			strncpy(bufferTwo, buffer, MAXFILESIZE);
+		}
 
-		int counter = atoi(taskNUM);
-
-		tdList[counter].isThereATask = true;
-		tdList[counter].taskNUM = taskNUM;
-		tdList[counter].year = atoi(year);
-		strncpy(tdList[counter].month, month, MAXTASKNAMELENGTH);
-		tdList[counter].day = atoi(day);
-		strncpy(tdList[counter].taskName, taskname, MAXTASKNAMELENGTH);
+		fclose(file);
 	}
-
-	fclose(fp);
-	return true;
+	else
+	{
+		//File not found, no memory leak since 'file' == NULL
+		//fclose(file) would cause an error
+		for (int i = 0; i < MAXNUMOFTASKS; i++) {			// Jordan this will need to be part of the loading I just need it
+			tdList[i].isThereATask = false;
+		}
+		printf("File not found");
+	}
 }
 
 void removeNfromChar(char* userInput) {

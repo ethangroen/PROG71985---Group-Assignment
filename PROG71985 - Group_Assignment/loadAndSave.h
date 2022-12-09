@@ -14,6 +14,8 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
+#define MAXFILESIZE 256
+
 #include "task.h"
 #include <stdio.h>
 #include <string.h>

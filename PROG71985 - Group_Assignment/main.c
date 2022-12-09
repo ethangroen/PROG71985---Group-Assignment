@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 		tdList[i].isThereATask = false;
 	}
 
-	if (LoadtdListFromDisk(tdList, "tasks.txt") == false) {
+	if (LoadtdListFromDisk(tdList, "Tasks.txt") == false) {
 		printf("There was no data to load\n");
 	}
 	else {
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 		}
 	} while (menuChoice != 'z');
 
-	if (SavetdListToDisk(tdList, "tasks.txt") == false) {
+	if (SavetdListToDisk(tdList, "Tasks.txt") == false) {
 		printf("Save was unsuccessful");
 	}
 
