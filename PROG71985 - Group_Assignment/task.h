@@ -22,13 +22,13 @@
 #include <stdbool.h>
 #include <string.h>
 
-typedef struct date {
+typedef struct date {				// Author: Ethan
 	char month[MAXMONTHNAME];
 	int year;
 	int day;
 }DATE;
 
-typedef struct task {
+typedef struct task {					// Author: Ethan
 	int taskNUM;
 	bool isThereATask;
 	char taskName[MAXTASKNAMELENGTH];
@@ -36,18 +36,18 @@ typedef struct task {
 }TASK;
 
 
-TASK createTask(int);
+TASK createTask(int);					// Author: Ethan
 
-void taskDelete(TASK[], int);
+void taskDelete(TASK[], int);			// Author: Ethan
 
-TASK updateExistingTask(TASK[]);
+TASK updateExistingTask(TASK[]);			// Author: Jordan
 
-bool isListFull(TASK[]);
+bool isListFull(TASK[]);			// Author: Ethan & Jordan
 
-void displayOneTask(TASK[], int);
+void displayOneTask(TASK[], int);		// Author: Ethan
 
-void displayRangeOfTasks(TASK[], int, int);
+void displayRangeOfTasks(TASK[], int, int);			// Author: Ethan
 
-void listOfAllTasks(TASK[]);
+void listOfAllTasks(TASK[]);			// Author: Ethan
 
-void searchForATAsk(TASK[]);
+void searchForATAsk(TASK[]);			// Author: Jordan

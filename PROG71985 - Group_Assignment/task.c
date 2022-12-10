@@ -47,7 +47,7 @@ void taskDelete(TASK tdList[], int taskNUM) {
 	tdList[taskNUM].isThereATask = false;				// When creating a task only checks if the bool is false or not
 }														// So nothing else needs to be removed
 
-TASK updateExistingTask(TASK tdList[], int taskNUM) {
+TASK updateExistingTask(TASK tdList[], int taskNUM) {					// Author: Jordan
 	TASK task;
 	task.taskNUM = taskNUM;
 	task.isThereATask = true;
@@ -119,7 +119,7 @@ TASK updateExistingTask(TASK tdList[], int taskNUM) {
 
 }
 
-bool isListFull(TASK tdList[]) {
+bool isListFull(TASK tdList[]) {						// Author: Ethan & Jordan
 	int counter = 0;
 	bool isFull = false;
 
@@ -136,7 +136,7 @@ bool isListFull(TASK tdList[]) {
 	return isFull;
 }
 
-void displayOneTask(TASK tdList[], int taskNUM) {
+void displayOneTask(TASK tdList[], int taskNUM) {					// Author: Ethan
 	if (tdList[taskNUM].isThereATask == true) {
 		printf("\nYou have selected to display task %d", taskNUM);
 
@@ -148,7 +148,7 @@ void displayOneTask(TASK tdList[], int taskNUM) {
 	}
 }
 
-void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {
+void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {			// Author: Ethan
 	for (int i = rangeStart; i <= rangeEnd; i++) {
 		if (tdList[i].isThereATask == true) {
 			printf("\nTask Number: %d", i);
@@ -159,7 +159,7 @@ void displayRangeOfTasks(TASK tdList[], int rangeStart, int rangeEnd) {
 	}
 }
 
-void listOfAllTasks(TASK tdList[]) {
+void listOfAllTasks(TASK tdList[]) {							// Author: Ethan
 	for (int i = 0; i < MAXNUMOFTASKS; i++) {
 		if (tdList[i].isThereATask == false) {}
 		else {
@@ -171,7 +171,7 @@ void listOfAllTasks(TASK tdList[]) {
 	}
 }
 
-void searchForATAsk(TASK tdList[]) {
+void searchForATAsk(TASK tdList[]) {							// Author: Jordan
 	char name[MAXTASKNAMELENGTH];
 	bool isPresent = false;
 

@@ -12,7 +12,7 @@
 
 #include "loadAndSave.h"
 
-bool SavetdListToDisk(TASK tdList[], char* filename)
+bool SavetdListToDisk(TASK tdList[], char* filename)				// Author: Jordan
 {
 	FILE* file;
 	fopen_s(&file, filename, "w");
@@ -34,7 +34,7 @@ bool SavetdListToDisk(TASK tdList[], char* filename)
 	return true;
 }
 
-bool LoadtdListFromDisk(TASK tdList[], char* filename)
+bool LoadtdListFromDisk(TASK tdList[], char* filename)				// Author: Jordan
 {
 	FILE* file;
 	if ((file = fopen(filename, "r")) != NULL)
@@ -73,13 +73,5 @@ bool LoadtdListFromDisk(TASK tdList[], char* filename)
 			tdList[i].isThereATask = false;
 		}
 		return false;
-	}
-}
-
-void removeNfromChar(char* userInput) {
-	for (int i = 0; i < strlen(userInput); i++) {
-		if (userInput[i] == '\n') {
-			userInput[i] = '\0';
-		}
 	}
 }

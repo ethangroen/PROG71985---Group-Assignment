@@ -21,10 +21,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool SavetdListToDisk(TASK[], char*);
+bool SavetdListToDisk(TASK[], char*);			// Author: Jordan
 
-void SaveTaskToStream(TASK, FILE*);
+bool LoadtdListFromDisk(TASK[], char*);			// Author: Jordan
 
-bool LoadtdListFromDisk(TASK[], char*);
-
-void removeNfromChar(char*);

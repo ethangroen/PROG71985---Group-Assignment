@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		switch (menuChoice) {
-		case 'a':					// Add new task	
+		case 'a':					// Add new task					Author: Ethan
 			if (isListFull(tdList) == true) {
 				printf("\nThe task list is full, there is no spcae for any additonal tasks.");
 				break;
@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			break;
-		case 'b':					// Delete existing task		
+		case 'b':					// Delete existing task					 Author: Ethan
 			taskNum = 0;
 			printf("\nEnter the number of the task that you want to delete: ");
 			if (scanf("%d", &taskNum)!=1) {
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 			}
 			taskDelete(tdList, taskNum);
 			break;
-		case 'c':					// Update an existing task	
+		case 'c':					// Update an existing task					 Author: Jordan
 			taskNum = 0;
 			printf("\nWhich task would you like to update? (Task 1 = 0):");
 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
 			updateExistingTask(tdList, taskNum);
 
 			break;
-		case 'd':					// Display one task		
+		case 'd':					// Display one task					 Author: Ethan
 			taskNum = 0;
 			printf("\nEnter the number of the task that you want to display (Task 1 = 0): ");
 			if (scanf("%d", &taskNum) != 1) {
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 			}
 			displayOneTask(tdList, taskNum);
 			break;
-		case 'e':					// Display a range of tasks		
+		case 'e':					// Display a range of tasks					 Author: Ethan
 			rangeStart = 0;
 			rangeEnd = 0;
 			printf("\nEnter the number where you want the range to start (Task 1 = 0): ");
@@ -103,10 +103,10 @@ int main(int argc, char* argv[]) {
 			}
 			displayRangeOfTasks(tdList, rangeStart, rangeEnd);
 			break;
-		case 'f':					// Display all existing tasks	
+		case 'f':					// Display all existing tasks				 Author: Ethan
 			listOfAllTasks(tdList);
 			break;
-		case 'g':					// Search for an existing task	
+		case 'g':					// Search for an existing task				 Author: Jordan
 			searchForATAsk(tdList);
 			break;
 		case 'z':					// Quit
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 		}
 	} while (menuChoice != 'z');
 
-	if (SavetdListToDisk(tdList, "Tasks.txt") == false) {
+	if (SavetdListToDisk(tdList, "Tasks.txt") == false) {					// Author: Jordan
 		printf("Save was unsuccessful");
 	}
 
